@@ -1,0 +1,21 @@
+{
+  "name": "school",
+  "version": "1.0.0",
+  "description": "school service",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Bolsunovskyi",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "bootswatch": "^3.3.6",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "jquery": "^2.2.4"
+  }
+}
