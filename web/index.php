@@ -2,6 +2,8 @@
 
 namespace app\web;
 
+include "../vendor/autoload.php";
+
 use app\config\Services;
 use Phalcon\Loader;
 use Phalcon\Mvc\Application;

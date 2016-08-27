@@ -2,11 +2,13 @@
 
 namespace app\config;
 
+use Phalcon\Db\Adapter\MongoDB\Client;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt;
+use Phalcon\Mvc\Collection\Manager as CollectionManager;
 
 class Services {
 
@@ -17,6 +19,15 @@ class Services {
 
     public function __construct() {
         $this->di = new FactoryDefault();
+
+        $this->di->set('mongo', function(){
+            $mongo = new Client();
+            return $mongo->selectDatabase('smart_house');
+        }, true);
+
+        $this->di->set('collectionManager', function(){
+            return new CollectionManager();
+        }, true);
 
         $this->di->set(
             'voltService',

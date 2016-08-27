@@ -4,3 +4,4 @@ node_modules/
 web/css/app.css
 web/js/app.js
 web/fonts/glyph*
+tests/_output/*

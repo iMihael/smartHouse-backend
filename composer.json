@@ -1,0 +1,11 @@
+{
+    "require": {
+        "phalcon/incubator": "^3.0",
+        "phpunit/phpunit": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "tests\\": "tests/"
+        }
+    }
+}
