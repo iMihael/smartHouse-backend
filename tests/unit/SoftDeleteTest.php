@@ -4,7 +4,7 @@ namespace tests\unit;
 
 use app\modules\admin\collections\BaseCollection;
 use tests\UnitTestCase;
-use Phalcon\Db\Adapter\MongoDB\Database;
+
 
 class SoftDeletableCollection extends BaseCollection {
     public function getSource()
@@ -71,12 +71,5 @@ class SoftDeleteTest extends UnitTestCase  {
         $this->assertEquals([], $nsdc);
     }
 
-    protected function tearDown()
-    {
-        /**
-         * @var $mongo Database;
-         */
-        $mongo = $this->getDI()->get('mongo');
-        $mongo->drop();
-    }
+
 }
