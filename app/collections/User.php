@@ -4,6 +4,7 @@ namespace app\collections;
 
 use app\components\IdentityInterface;
 use app\modules\admin\collections\BaseCollection;
+use app\validators\IsUnique;
 use Phalcon\Mvc\Model\Validator\Email;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Phalcon\Security;
@@ -58,6 +59,15 @@ class User extends BaseCollection implements IdentityInterface
         $this->auth_key = $random->base64Safe(32);
     }
 
+    public function attributeNames()
+    {
+        return [
+            'first_name',
+            'last_name',
+            'email',
+        ];
+    }
+
     public function validation()
     {
         $presence = [
@@ -78,6 +88,28 @@ class User extends BaseCollection implements IdentityInterface
             'field' => 'email',
         ]));
 
+        if(!$this->getId()) {
+            $this->validate(new IsUnique([
+                'field' => 'email'
+            ]));
+        }
+
         return $this->validationHasFailed() != true;
+    }
+
+    public function signUp(array $validPost) {
+        $this->setAttributes($validPost);
+        $this->setPassword($validPost['password']);
+        $this->generateAuthKey();
+        if($this->save()) {
+            /**
+             * @var $auth \app\components\User
+             */
+            $auth = $this->getDI()->get('user');
+            $auth->login($this);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -24,10 +24,11 @@ class Router {
             'action' => 'index',
         ]);
 
-        $this->router->add('/login', [
+        $this->router->add('/:controller/:action/:params', [
+            'controller' => 1,
+            'action' => 2,
+            'params' => 3,
             'namespace' => self::DEFAULT_NAMESPACE,
-            'controller' => 'auth',
-            'action' => 'login'
         ]);
 
         $this->router->notFound([

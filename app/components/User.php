@@ -20,6 +20,7 @@ class User
 
     public $idParam = '_identity';
 
+    //errors
     const IS_NOT_IDENTITY = 13;
     const INVALID_IDENTITY = 14;
 
@@ -45,20 +46,21 @@ class User
     {
         if(!$this->identity) {
             if($id = $this->cookies->get($this->idParam)) {
-                $data = json_decode($id, true);
-                if(count($data) == 2) {
-                    list($id, $authKey) = $data;
+                if($data = json_decode($id, true)) {
+                    if (count($data) == 2) {
+                        list($id, $authKey) = $data;
 
-                    /* @var $class IdentityInterface */
-                    $class = $this->identityClassName;
+                        /* @var $class IdentityInterface */
+                        $class = $this->identityClassName;
 
-                    if($identity = $class::findIdentity($id)) {
-                        if (!$identity instanceof IdentityInterface) {
-                            throw new \Exception('Invalid identity', self::INVALID_IDENTITY);
-                        } else if(!$identity->validateAuthKey($authKey)) {
-                            //TODO: log hack attempt
-                        } else {
-                            $this->identity = $identity;
+                        if ($identity = $class::findIdentity($id)) {
+                            if (!$identity instanceof IdentityInterface) {
+                                throw new \Exception('Invalid identity', self::INVALID_IDENTITY);
+                            } else if (!$identity->validateAuthKey($authKey)) {
+                                //TODO: log hack attempt
+                            } else {
+                                $this->identity = $identity;
+                            }
                         }
                     }
                 }
@@ -96,5 +98,11 @@ class User
             ]),
             $duration
         );
+    }
+
+    public function logout()
+    {
+        $this->cookies->set($this->idParam, null);
+        $this->identity = null;
     }
 }

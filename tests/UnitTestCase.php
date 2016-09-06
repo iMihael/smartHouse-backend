@@ -10,6 +10,7 @@ use Phalcon\Security;
 use Phalcon\Test\UnitTestCase as PhalconTestCase;
 use Phalcon\Mvc\Collection\Manager as CollectionManager;
 use Phalcon\Db\Adapter\MongoDB\Database;
+use tests\unit\fakes\Response;
 
 abstract class UnitTestCase extends PhalconTestCase
 {
@@ -35,31 +36,18 @@ abstract class UnitTestCase extends PhalconTestCase
         // Load any additional services that might be required during testing
         $di = Di::getDefault();
 
-        $di->set('collectionManager', function(){
-            return new CollectionManager();
-        }, true);
+        $services = new Services($di);
 
         $di->set('mongo', function(){
             $mongo = new Client();
             return $mongo->selectDatabase('smart_house_test');
         }, true);
 
-        $di->set('cookies', function () {
-            $cookies = new Cookies();
-            return $cookies;
+        $di->set('response', function(){
+            return new Response();
         });
 
-        $di->set('security', function () {
-
-            $security = new Security();
-
-            // Set the password hashing factor to 12 rounds
-            $security->setWorkFactor(12);
-
-            return $security;
-        }, true);
-
-        $this->setDI($di);
+        $this->setDI($services->getDI());
 
         $this->_loaded = true;
     }

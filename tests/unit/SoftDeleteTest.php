@@ -6,14 +6,16 @@ use app\modules\admin\collections\BaseCollection;
 use tests\UnitTestCase;
 
 
-class SoftDeletableCollection extends BaseCollection {
+class SoftDeletableCollection extends BaseCollection
+{
     public function getSource()
     {
         return "soft_deletable_collection";
     }
 }
 
-class NonSoftDeletableCollection extends BaseCollection {
+class NonSoftDeletableCollection extends BaseCollection
+{
     protected static function softDelete()
     {
         return false;
@@ -25,7 +27,8 @@ class NonSoftDeletableCollection extends BaseCollection {
     }
 }
 
-class SoftDeleteTest extends UnitTestCase  {
+class SoftDeleteTest extends UnitTestCase
+{
     public function testCanNotBeDeleted()
     {
         $sdc = new SoftDeletableCollection();
@@ -45,12 +48,13 @@ class SoftDeleteTest extends UnitTestCase  {
             ['_id' => $id]
         ]);
 
-        if(isset($sdc[0])) {
+        if (isset($sdc[0])) {
             $this->assertInstanceOf(SoftDeletableCollection::class, $sdc[0]);
         }
     }
 
-    public function testCanBeDeleted() {
+    public function testCanBeDeleted()
+    {
         $nsdc = new NonSoftDeletableCollection();
         $nsdc->name = 'sss';
         $nsdc->description = 'asdawqd';
@@ -70,6 +74,4 @@ class SoftDeleteTest extends UnitTestCase  {
 
         $this->assertEquals([], $nsdc);
     }
-
-
 }
