@@ -14,16 +14,19 @@ use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Mvc\Collection\Manager as CollectionManager;
 use Phalcon\Security;
 use Phalcon\Session\Adapter\Files as Session;
+use Phalcon\Acl\Adapter\Memory as AclList;
 
-class Services {
+class Services
+{
 
     /**
      * @var FactoryDefault
      */
     private $di;
 
-    public function __construct($di = false) {
-        if(!$di) {
+    public function __construct($di = false)
+    {
+        if (!$di) {
             $this->di = new FactoryDefault();
         } else {
             $this->di = $di;
@@ -31,12 +34,12 @@ class Services {
 
         $params = include(__DIR__ . '/params.php');
 
-        $this->di->set('mongo', function() use ($params){
+        $this->di->set('mongo', function () use ($params) {
             $mongo = new Client($params['mongo']['uri']);
             return $mongo->selectDatabase($params['mongo']['databaseName']);
         }, true);
 
-        $this->di->set('collectionManager', function(){
+        $this->di->set('collectionManager', function () {
             return new CollectionManager();
         }, true);
 
@@ -48,7 +51,7 @@ class Services {
 
                 $volt->setOptions(
                     [
-                        'compiledPath'      => '../app/cache/volt/',
+                        'compiledPath' => '../app/cache/volt/',
                         'compiledExtension' => '.compiled',
                         'compileAlways' => true, //TODO: on production fix
                         'autoescape' => true,
@@ -56,15 +59,18 @@ class Services {
                 );
 
                 $compiler = $volt->getCompiler();
-                $compiler->addFunction('isGuest', function() {
+                $compiler->addFunction('isGuest', function () {
                     return '$this->di->get("user")->isGuest()';
+                });
+                $compiler->addFunction('getIdentity', function () {
+                    return '$this->di->get("user")->getIdentity()';
                 });
 
                 return $volt;
             }
         );
 
-        $this->di->set('view', function(){
+        $this->di->set('view', function () {
 
             $view = new View();
             $view->setViewsDir('../app/views/');
@@ -83,7 +89,7 @@ class Services {
         });
 
 
-        $this->di->set('router', function(){
+        $this->di->set('router', function () {
             $router = new Router();
             return $router->getRouter();
         });
@@ -117,7 +123,7 @@ class Services {
             return $cookies;
         });
 
-        $this->di->set('session', function(){
+        $this->di->set('session', function () {
             $s = new Session();
             $s->start();
             return $s;
@@ -125,7 +131,7 @@ class Services {
 
         $di = $this->di;
 
-        $this->di->set('user', function() use ($di){
+        $this->di->set('user', function () use ($di) {
             $cookies = $di->get('cookies');
             $user = new User($cookies, \app\collections\User::class);
             return $user;
@@ -134,7 +140,13 @@ class Services {
         //TODO: think about caching (serialize) di as object
     }
 
-    public function getDI() {
+    public function getDI()
+    {
         return $this->di;
+    }
+
+    private function setAcl()
+    {
+
     }
 }

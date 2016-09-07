@@ -37,7 +37,15 @@
                     </li>
                 {% else %}
                     <li>
-                        <a href="{{ url('auth/logout') }}">Logout</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <b>{{ getIdentity().first_name }} {{ getIdentity().last_name }}</b> <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ url('auth/logout') }}">Logout</a>
+                            </li>
+                        </ul>
+
                     </li>
                 {% endif %}
             </ul>

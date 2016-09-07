@@ -1,7 +1,8 @@
 {
     "require": {
         "phalcon/incubator": "^3.0",
-        "phpunit/phpunit": "^5.5"
+        "phpunit/phpunit": "^5.5",
+        "phalcon/devtools": "^3.0"
     },
     "autoload": {
         "psr-4": {

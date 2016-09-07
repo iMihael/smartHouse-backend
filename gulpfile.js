@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat');
 
-var dev = true;
+var dev = false;
 
 var js = [
     './node_modules/jquery/dist/jquery.min.js',
