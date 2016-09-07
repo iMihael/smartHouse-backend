@@ -1,6 +1,6 @@
 <?php
 
-namespace app\web;
+namespace web;
 
 include "../vendor/autoload.php";
 

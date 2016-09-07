@@ -10,6 +10,9 @@ class Security extends Plugin
 {
     public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher)
     {
+        $controller = $dispatcher->getControllerName();
+        $action = $dispatcher->getActionName();
 
+        return true;
     }
 }

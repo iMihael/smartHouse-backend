@@ -14,7 +14,7 @@ use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Mvc\Collection\Manager as CollectionManager;
 use Phalcon\Security;
 use Phalcon\Session\Adapter\Files as Session;
-use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Events\Manager as EventsManager;
 
 class Services
 {
@@ -85,6 +85,12 @@ class Services
         $this->di->set('dispatcher', function () {
             $dispatcher = new Dispatcher();
             $dispatcher->setDefaultNamespace("app\\controllers");
+
+            $eventsManager = new EventsManager();
+            $eventsManager->attach('dispatch:beforeExecuteRoute', new \app\plugins\Security());
+
+            $dispatcher->setEventsManager($eventsManager);
+
             return $dispatcher;
         });
 
