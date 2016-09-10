@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\unit\validators;
+namespace tests\phpunit\tests\validators;
 
 use app\modules\admin\collections\BaseCollection;
 use app\validators\IsUnique;
-use tests\UnitTestCase;
+use tests\phpunit\UnitTestCase;
 
 class IsUniqueTest extends UnitTestCase
 {

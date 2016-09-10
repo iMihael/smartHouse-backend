@@ -1,11 +1,11 @@
 <?php
 
-namespace tests\unit\components;
+namespace tests\phpunit\tests\components;
 
 use app\components\IdentityInterface;
 use app\components\User;
-use tests\unit\helpers\FooUser;
-use tests\UnitTestCase;
+use tests\phpunit\tests\helpers\FooUser;
+use tests\phpunit\UnitTestCase;
 
 class UserComponentTest extends UnitTestCase
 {

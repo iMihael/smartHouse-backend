@@ -29,7 +29,7 @@ class Router {
             'action' => 2,
             'params' => 3,
             'namespace' => self::DEFAULT_NAMESPACE,
-        ]);
+        ])->setName('defaultControllers');
 
         $this->router->notFound([
             'namespace' => self::DEFAULT_NAMESPACE,
@@ -46,7 +46,7 @@ class Router {
                 'params'     => 3,
                 'namespace' => self::ADMIN_NAMESPACE,
             ]
-        );
+        )->setName('adminControllers');
     }
 
     public function getRouter() {

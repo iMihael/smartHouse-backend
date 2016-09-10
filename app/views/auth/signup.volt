@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" />
+                        <input type="submit" value="SignUp" class="btn btn-primary" />
                     </div>
                     {% endautoescape %}
                 </form>

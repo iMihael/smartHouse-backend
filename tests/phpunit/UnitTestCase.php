@@ -1,16 +1,13 @@
 <?php
 
-namespace tests;
+namespace tests\phpunit;
 
 use app\config\Services;
 use Phalcon\Db\Adapter\MongoDB\Client;
 use Phalcon\Di;
-use Phalcon\Http\Response\Cookies;
-use Phalcon\Security;
 use Phalcon\Test\UnitTestCase as PhalconTestCase;
-use Phalcon\Mvc\Collection\Manager as CollectionManager;
 use Phalcon\Db\Adapter\MongoDB\Database;
-use tests\unit\fakes\Response;
+use tests\phpunit\tests\fakes\Response;
 
 abstract class UnitTestCase extends PhalconTestCase
 {

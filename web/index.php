@@ -2,7 +2,7 @@
 
 namespace web;
 
-include "../vendor/autoload.php";
+include __DIR__ . "/../vendor/autoload.php";
 
 use app\config\Services;
 use Phalcon\Loader;
@@ -10,7 +10,7 @@ use Phalcon\Mvc\Application;
 
 $loader = new Loader();
 $loader->registerNamespaces([
-    'app' => '../app',
+    'app' => __DIR__ . '/../app',
 ])->register();
 
 $services = new Services();
@@ -18,7 +18,7 @@ $app = new Application($services->getDI());
 $app->registerModules([
     'admin' => [
         'className' => 'app\modules\admin\Module',
-        'path' => '../app/modules/admin/Module.php',
+        'path' => __DIR__ . '/../app/modules/admin/Module.php',
     ],
 ]);
 $app->handle()->send();

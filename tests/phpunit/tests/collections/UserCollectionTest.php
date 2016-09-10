@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\unit\collections;
+namespace tests\phpunit\tests\collections;
 
 use app\collections\User;
 use app\components\IdentityInterface;
 use Phalcon\Security\Random;
-use tests\unit\helpers\FooUser;
-use tests\UnitTestCase;
+use tests\phpunit\tests\helpers\FooUser;
+use tests\phpunit\UnitTestCase;
 
 class UserCollectionTest extends UnitTestCase
 {

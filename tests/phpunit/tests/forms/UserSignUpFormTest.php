@@ -1,9 +1,9 @@
 <?php
 
-namespace tests\unit\forms;
+namespace tests\phpunit\tests\forms;
 
 use app\forms\SignUp;
-use tests\UnitTestCase;
+use tests\phpunit\UnitTestCase;
 
 class UserSignUpFormTest extends UnitTestCase
 {

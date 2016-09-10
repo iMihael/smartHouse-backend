@@ -1,9 +1,9 @@
 <?php
 
-namespace tests\unit;
+namespace tests\phpunit\tests;
 
 use app\modules\admin\collections\BaseCollection;
-use tests\UnitTestCase;
+use tests\phpunit\UnitTestCase;
 
 
 class SoftDeletableCollection extends BaseCollection

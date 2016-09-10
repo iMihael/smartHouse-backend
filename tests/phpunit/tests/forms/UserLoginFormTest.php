@@ -1,11 +1,11 @@
 <?php
 
-namespace tests\unit\forms;
+namespace tests\phpunit\tests\forms;
 
 use app\components\User;
 use app\forms\Login;
-use tests\unit\helpers\FooUser;
-use tests\UnitTestCase;
+use tests\phpunit\tests\helpers\FooUser;
+use tests\phpunit\UnitTestCase;
 
 class UserLoginFormTest extends UnitTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\helpers;
+namespace tests\phpunit\tests\helpers;
 
 use app\collections\User;
 use app\config\Acl;

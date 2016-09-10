@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\fakes;
+namespace tests\phpunit\tests\fakes;
 
 class Response extends \Phalcon\Http\Response
 {
