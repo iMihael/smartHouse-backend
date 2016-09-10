@@ -141,7 +141,7 @@ class Services
             $cookies = $di->get('cookies');
             $user = new User($cookies, \app\collections\User::class);
             return $user;
-        });
+        }, true);
 
         //TODO: think about caching (serialize) di as object
     }

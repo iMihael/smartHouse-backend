@@ -77,9 +77,10 @@ class UserCollectionTest extends UnitTestCase
             'first_name' => 'Vasiliy',
             'last_name' => 'Pupkin',
             'email' => 'vasiliy@gmail.com',
-            'password' => '123'
+            'password' => '123',
         ]);
         $this->assertTrue($result);
-        //TODO: test isGuest
+
+        $this->assertFalse($this->getDI()->get('user')->isGuest());
     }
 }

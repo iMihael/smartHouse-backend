@@ -3,6 +3,7 @@
 namespace app\collections;
 
 use app\components\IdentityInterface;
+use app\config\Acl;
 use app\modules\admin\collections\BaseCollection;
 use app\validators\IsUnique;
 use Phalcon\Mvc\Model\Validator\Email;
@@ -12,12 +13,31 @@ use Phalcon\Security;
 /**
  * Class User
  * @property string $password_hash
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $role
+ * @property string $email
  * @package app\collections
  */
 class User extends BaseCollection implements IdentityInterface
 {
-    public function getIdentityId() {
+    public function initialize()
+    {
+        $this->role = Acl::ROLE_USER;
+    }
+
+    public function getIdentityId()
+    {
         return (string)$this->getId();
+    }
+
+    public function getRole()
+    {
+        if ($this->role) {
+            return $this->role;
+        }
+
+        return Acl::ROLE_USER;
     }
 
     public static function findIdentity($id)
@@ -65,6 +85,7 @@ class User extends BaseCollection implements IdentityInterface
             'first_name',
             'last_name',
             'email',
+            'role',
         ];
     }
 
@@ -75,7 +96,8 @@ class User extends BaseCollection implements IdentityInterface
             'last_name',
             'email',
             'password_hash',
-            'auth_key'
+            'auth_key',
+            'role'
         ];
 
         foreach ($presence as $field) {
@@ -88,7 +110,7 @@ class User extends BaseCollection implements IdentityInterface
             'field' => 'email',
         ]));
 
-        if(!$this->getId()) {
+        if (!$this->getId()) {
             $this->validate(new IsUnique([
                 'field' => 'email'
             ]));
@@ -97,11 +119,12 @@ class User extends BaseCollection implements IdentityInterface
         return $this->validationHasFailed() != true;
     }
 
-    public function signUp(array $validPost) {
+    public function signUp(array $validPost)
+    {
         $this->setAttributes($validPost);
         $this->setPassword($validPost['password']);
         $this->generateAuthKey();
-        if($this->save()) {
+        if ($this->save()) {
             /**
              * @var $auth \app\components\User
              */

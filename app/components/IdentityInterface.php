@@ -8,4 +8,5 @@ interface IdentityInterface {
     public static function findIdentityByAccessToken($token);
     public function getAuthKey();
     public function validateAuthKey($authKey);
+    public function getRole();
 }

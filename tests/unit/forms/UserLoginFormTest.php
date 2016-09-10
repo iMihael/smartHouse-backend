@@ -24,13 +24,13 @@ class UserLoginFormTest extends UnitTestCase
         ]));
 
         $this->assertFalse($form->loginUser('vasia@gmail.com', '123'));
-        $result = $form->loginUser($user->email, '123456');
+        $result = $form->loginUser($user->email, $this->userPassword);
         $this->assertTrue($result);
 
         /**
          * @var $auth User
          */
         $auth = $this->getDI()->get('user');
-        //TODO: test isGuest
+        $this->assertFalse($auth->isGuest());
     }
 }

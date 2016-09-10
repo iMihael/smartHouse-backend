@@ -10,6 +10,7 @@ class AuthController extends BaseController
 {
     public function signUpAction()
     {
+        //TODO: write functional test
         $form = new SignUp();
         $errors = false;
 
@@ -34,6 +35,7 @@ class AuthController extends BaseController
 
     public function loginAction()
     {
+        //TODO: write functional test
         $form = new Login();
         $errors = false;
 

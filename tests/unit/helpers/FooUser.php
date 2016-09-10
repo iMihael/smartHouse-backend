@@ -3,14 +3,19 @@
 namespace tests\unit\helpers;
 
 use app\collections\User;
+use app\config\Acl;
 
 trait FooUser {
+
+    private $userPassword = '123456';
+
     public function createFooUser() {
         $user = new User();
         $user->first_name = 'Mike';
         $user->last_name = 'B.';
         $user->email = 'mike@gmail.com';
-        $user->setPassword('123456');
+        $user->role = Acl::ROLE_USER;
+        $user->setPassword($this->userPassword);
         $user->generateAuthKey();
 
         if($user->save()) {

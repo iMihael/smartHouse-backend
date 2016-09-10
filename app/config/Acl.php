@@ -12,6 +12,9 @@ class Acl
     const COLLECTION_ACL_ACCESSES = 'acl_resources_accesses';
     const COLLECTION_ACL_ACCESS_LIST = 'acl_access_list';
 
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+
     private $acl;
 
     public function __construct($databaseName)

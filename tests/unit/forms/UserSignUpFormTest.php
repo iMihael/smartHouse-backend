@@ -15,7 +15,7 @@ class UserSignUpFormTest extends UnitTestCase
         $this->assertFalse($form->isValid([
             'first_name' => 'foo',
             'last_name' => 'bar',
-            'email' => 'foo'
+            'email' => 'foo',
         ]));
 
         $this->assertNotEmpty($form->getMessages());
