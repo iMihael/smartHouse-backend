@@ -4,8 +4,6 @@ WORKDIR /usr/share/nginx/html
 
 RUN apt-get update && apt-get install -y git zlib1g-dev
 RUN docker-php-ext-install -j$(nproc) zip
-RUN docker-php-ext-install -j$(nproc) pdo pdo_mysql
-
 
 RUN apt-get install -y libcurl3 libcurl3-dev curl
 RUN docker-php-ext-install -j$(nproc) curl

@@ -23,6 +23,7 @@ app:
     volumes:
         - .:/usr/share/nginx/html
     command: "true"
+    container_name: house_app
 
 mongo:
     image: mongo:latest

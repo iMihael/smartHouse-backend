@@ -6,6 +6,6 @@ return [
     ],
     'mongo' => [
         'databaseName' => 'smart_house',
-        'uri' => 'mongodb://localhost:27017',
+        'uri' => 'mongodb://mongo:27017',
     ],
 ];
