@@ -1,0 +1,29 @@
+nginx:
+    build: ./docker/nginx/
+    ports:
+        - 8000:8000
+    links:
+        - php
+    volumes_from:
+        - app
+    container_name: house_nginx
+
+php:
+    build: ./docker/php-fpm
+    expose:
+        - 9000
+    links:
+        - mongo
+    volumes_from:
+        - app
+    container_name: house_php
+
+app:
+    image: php:7.0-fpm
+    volumes:
+        - .:/usr/share/nginx/html
+    command: "true"
+
+mongo:
+    image: mongo:latest
+    container_name: house_mongo
