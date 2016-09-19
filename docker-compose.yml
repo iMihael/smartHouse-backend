@@ -28,3 +28,9 @@ app:
 mongo:
     image: mongo:latest
     container_name: house_mongo
+
+node:
+    build: ./docker/node
+    volumes_from:
+        - app
+    container_name: house_node
