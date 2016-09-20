@@ -27,6 +27,10 @@ app:
 
 mongo:
     image: mongo:latest
+    expose:
+        - 27017
+    ports:
+        - 8001:27017
     container_name: house_mongo
 
 node:
