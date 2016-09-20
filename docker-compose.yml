@@ -18,6 +18,13 @@ php:
         - app
     container_name: house_php
 
+php-cli:
+    build: ./docker/php-cli
+    volumes_from:
+        - app
+    links:
+        - mongo
+
 app:
     image: php:7.0-fpm
     volumes:
