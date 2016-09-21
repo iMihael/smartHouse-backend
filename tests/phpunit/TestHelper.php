@@ -15,11 +15,5 @@ $loader->registerNamespaces([
 ])->register();
 
 $di = new FactoryDefault();
-
-
-
 Di::reset();
-
-// Add any needed services to the DI here
-
 Di::setDefault($di);

@@ -27,6 +27,22 @@ To use xdebug with docker container please set
 ENV XDEBUG_CONFIG remote_host={HOST_IP} 
 to your actual ip address in `docker/php-fpm/Dockerfile`
 
+To access docker bash use command:
+> docker exec -it house_php bash
+
+Tests
+--------------------------------
+- To run unit tests you must access house_php bash, cd `/usr/share/nginx/html/tests/phpunit` 
+and run `php ../../vendor/bin/phpunit -c PHPunit.xml`  
+- Also you can exec only one command to run unit tests: `docker exec house_php php /usr/share/nginx/html/vendor/bin/phpunit -c /usr/share/nginx/html/tests/phpunit/PHPunit.xml`
+
+TODO: think about how to run codeception acceptance tests
+
+JS CSS Assets > Gulp
+----------------
+For managing js and css assets we are using gulp.js. If you want make some changes in js or ccs you must rebuild gulp, to do that - 
+ execute `docker-compose up node`
+
 Manual installation
 -------------------------
 + composer install

@@ -34,9 +34,10 @@ abstract class UnitTestCase extends PhalconTestCase
         $di = Di::getDefault();
 
         $services = new Services($di);
+        $params = include(__DIR__ . '/../../app/config/params.php');
 
-        $di->set('mongo', function(){
-            $mongo = new Client();
+        $di->set('mongo', function() use ($params) {
+            $mongo = new Client($params['mongo']['uri']);
             return $mongo->selectDatabase('smart_house_test');
         }, true);
 
